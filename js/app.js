@@ -18,6 +18,8 @@
  * 
 */
 
+// variable for storing sections and later usage for navbar 
+let sectionsList;
 
 /**
  * End Global Variables
