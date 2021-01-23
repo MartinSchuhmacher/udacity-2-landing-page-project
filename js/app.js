@@ -29,16 +29,29 @@ const navFragment = document.createDocumentFragment();
  * 
 */
 
-function buildMenuItems(secList) {
+// function to build list items with given section list and fragment for cache
+function buildMenuItems(secList, fragment) {
     //for..of loop to create list item for every item in the secList and cache in the former created fragment 
-    for(let sec of secList) {
+    for(const sec of secList) {
         const newElement = document.createElement('li');
         newElement.innerText = sec.getAttribute('data-nav');
         newElement.classList.toggle('menu__link');
-        navFragment.appendChild(newElement);
+        fragment.appendChild(newElement);
     }
+    return fragment;
 }
 
+// function to check if the given section is in the viewport
+function checkViewport(sec) {
+    const rect = sec.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        // following two fallbacks if browser does not support the first option (given by www.javascripttutorial.net)
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
 
 /**
  * End Helper Functions
@@ -47,7 +60,7 @@ function buildMenuItems(secList) {
 */
 
 // build the nav (with all available section elements)
-buildMenuItems(document.querySelectorAll('section'));
+buildMenuItems(document.querySelectorAll('section'), navFragment);
 
 //adding fragment (navbar items) in the unordered list
 document.querySelector('#navbar__list').appendChild(navFragment);
