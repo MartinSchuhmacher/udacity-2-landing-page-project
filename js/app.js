@@ -18,8 +18,10 @@
  * 
 */
 
-// variable for storing sections and later usage for navbar 
-let sectionsList;
+// document fragment for creating list items for unordered list - for better performance
+const navFragment = document.createDocumentFragment();
+
+
 
 /**
  * End Global Variables
@@ -27,6 +29,15 @@ let sectionsList;
  * 
 */
 
+function buildMenuItems(secList) {
+    //for..of loop to create list item for every item in the secList and cache in the former created fragment 
+    for(let sec of secList) {
+        const newElement = document.createElement('li');
+        newElement.innerText = sec.getAttribute('data-nav');
+        newElement.classList.toggle('menu__link');
+        navFragment.appendChild(newElement);
+    }
+}
 
 
 /**
@@ -35,8 +46,11 @@ let sectionsList;
  * 
 */
 
-// build the nav
+// build the nav (with all available section elements)
+buildMenuItems(document.querySelectorAll('section'));
 
+//adding fragment (navbar items) in the unordered list
+document.querySelector('#navbar__list').appendChild(navFragment);
 
 // Add class 'active' to section when near top of viewport
 
