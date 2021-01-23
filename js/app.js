@@ -30,7 +30,7 @@ const navFragment = document.createDocumentFragment();
 */
 
 // function to build list items with given section list and fragment for cache
-function buildMenuItems(secList, fragment) {
+function buildListItems(secList, fragment) {
     //for..of loop to create list item for every item in the secList and cache in the former created fragment 
     for(const sec of secList) {
         const newElement = document.createElement('li');
@@ -38,7 +38,8 @@ function buildMenuItems(secList, fragment) {
         newElement.classList.toggle('menu__link');
         fragment.appendChild(newElement);
     }
-    return fragment;
+    //adding fragment (list items) in the unordered list for menu
+    document.querySelector('#navbar__list').appendChild(fragment);
 }
 
 // function to check if the given section is in the viewport
@@ -59,11 +60,8 @@ function checkViewport(sec) {
  * 
 */
 
-// build the nav (with all available section elements)
-buildMenuItems(document.querySelectorAll('section'), navFragment);
+// build the nav
 
-//adding fragment (navbar items) in the unordered list
-document.querySelector('#navbar__list').appendChild(navFragment);
 
 // Add class 'active' to section when near top of viewport
 
@@ -78,6 +76,7 @@ document.querySelector('#navbar__list').appendChild(navFragment);
 */
 
 // Build menu 
+window.addEventListener('load', buildListItems(document.querySelectorAll('section'), navFragment));
 
 // Scroll to section on link click
 
