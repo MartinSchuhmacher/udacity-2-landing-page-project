@@ -18,6 +18,7 @@
  * 
 */
 
+const sectionList = document.querySelectorAll('section');
 
 
 /**
@@ -48,17 +49,31 @@ function checkViewport(sec) {
 // QUESTION for reviewer: tried that with document fragment but I needed something similar for element (fragment), does that exist? could not find something like that
 function buildListItems(secList, navList) {
     //for..of loop to create list item for every item in the secList and cache in the former created fragment 
-    for(const sec of secList) {
+    for (const sec of secList) {
         const newElement =
-            `<li data-link="${sec.getAttribute('id')}" class="menu__link">
+            `<li data-link=${sec.getAttribute('id')} class="menu__link">
                 <a href="#${sec.getAttribute('id')}">${sec.getAttribute('data-nav')}</a>
             </li>`;
         navList.insertAdjacentHTML('beforeend', newElement);
     }
 }
 
+// Add class 'active' to section when in recent view position
+function setActiveSection(secList) {
+    for (const sec of secList) {
+        if (checkViewport(sec)) {
+            sec.classList.add('active');
+            document.querySelector(`[data-link="${sec.getAttribute('id')}"]`).classList.add('active');
+        }
+        else {
+            if (sec.classList.contains('active')) {
+                sec.classList.remove('active');
+                document.querySelector(`[data-link="${sec.getAttribute('id')}"]`).classList.remove('active')
+            }
+        }
+    }
+}
 
-// Add class 'active' to section when near top of viewport
 
 
 // Scroll to anchor ID using scrollTO event
@@ -71,8 +86,9 @@ function buildListItems(secList, navList) {
 */
 
 // Build menu 
-window.addEventListener('load', buildListItems(document.querySelectorAll('section'), document.querySelector('#navbar__list')));
+window.onload = function() {buildListItems(sectionList, document.querySelector('#navbar__list'))};
 
 // Scroll to section on link click
 
 // Set sections as active
+window.onscroll = function() {setActiveSection(sectionList)};
