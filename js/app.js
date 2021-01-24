@@ -19,7 +19,7 @@
 */
 
 const sectionList = document.querySelectorAll('section');
-
+const navbarList = document.querySelector('#navbar__list');
 
 /**
  * End Global Variables
@@ -74,11 +74,6 @@ function setActiveSection(secList) {
     }
 }
 
-
-
-// Scroll to anchor ID using scrollTO event
-
-
 /**
  * End Main Functions
  * Begin Events
@@ -86,9 +81,17 @@ function setActiveSection(secList) {
 */
 
 // Build menu 
-window.onload = function() {buildListItems(sectionList, document.querySelector('#navbar__list'))};
+window.onload = function() {buildListItems(sectionList, navbarList)};
 
-// Scroll to section on link click
+// Scroll smoothly to section on link click
+navbarList.addEventListener('click', function(event) {
+    event.preventDefault();
+    const clickedSection = event.target.hasAttribute('data-link')
+    ? event.target
+    : event.target.parentElement;
+    const sectionToScroll = document.querySelector(`#${clickedSection.getAttribute('data-link')}`);
+    sectionToScroll.scrollIntoView({block: 'end', behavior: 'smooth'});
+});
 
 // Set sections as active
 window.onscroll = function() {setActiveSection(sectionList)};

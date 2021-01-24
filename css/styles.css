@@ -79,10 +79,16 @@ section {
     display: inline-block;
 }
 
+li a {
+    color: #000;
+    text-decoration: none;
+}
+
 li.active {
     border-style: solid;
     border-radius: 12px;
-    border-color: #dc143c;
+    border-color:#000;
+    background-color: rgba(15, 28, 107, 0.603);
     transition: ease 0.2s all;
 }
 
@@ -95,9 +101,10 @@ li.active {
 }
 
 .navbar__menu .menu__link:hover {
-    background: #333;
+    border-radius: 12px;
+    background: rgba(15, 28, 107, 0.603);
     color: #fff;
-    transition: linear 0.3s all;
+    transition: ease 0.2s all;
 }
 
 /* Header Styles */
