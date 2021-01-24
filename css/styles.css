@@ -79,6 +79,13 @@ section {
     display: inline-block;
 }
 
+li.active {
+    border-style: solid;
+    border-radius: 12px;
+    border-color: #dc143c;
+    padding: 0;
+}
+
 .navbar__menu .menu__link {
     display: block;
     padding: 1em;
