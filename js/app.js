@@ -18,9 +18,6 @@
  * 
 */
 
-// document fragment for creating list items for unordered list - for better performance
-const navFragment = document.createDocumentFragment();
-
 
 
 /**
@@ -28,19 +25,6 @@ const navFragment = document.createDocumentFragment();
  * Start Helper Functions
  * 
 */
-
-// function to build list items with given section list and fragment for cache
-function buildListItems(secList, fragment) {
-    //for..of loop to create list item for every item in the secList and cache in the former created fragment 
-    for(const sec of secList) {
-        const newElement = document.createElement('li');
-        newElement.innerText = sec.getAttribute('data-nav');
-        newElement.classList.toggle('menu__link');
-        fragment.appendChild(newElement);
-    }
-    //adding fragment (list items) in the unordered list for menu
-    document.querySelector('#navbar__list').appendChild(fragment);
-}
 
 // function to check if the given section is in the viewport
 function checkViewport(sec) {
@@ -60,7 +44,18 @@ function checkViewport(sec) {
  * 
 */
 
-// build the nav
+// function to build list items with given section list and fragment for cache
+// QUESTION for reviewer: tried that with document fragment but I needed something similar for element (fragment), does that exist? could not find something like that
+function buildListItems(secList, navList) {
+    //for..of loop to create list item for every item in the secList and cache in the former created fragment 
+    for(const sec of secList) {
+        const newElement =
+            `<li data-link="${sec.getAttribute('id')}" class="menu__link">
+                <a href="#${sec.getAttribute('id')}">${sec.getAttribute('data-nav')}</a>
+            </li>`;
+        navList.insertAdjacentHTML('beforeend', newElement);
+    }
+}
 
 
 // Add class 'active' to section when near top of viewport
@@ -76,7 +71,7 @@ function checkViewport(sec) {
 */
 
 // Build menu 
-window.addEventListener('load', buildListItems(document.querySelectorAll('section'), navFragment));
+window.addEventListener('load', buildListItems(document.querySelectorAll('section'), document.querySelector('#navbar__list')));
 
 // Scroll to section on link click
 
