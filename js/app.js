@@ -20,6 +20,7 @@
 
 const sectionList = document.querySelectorAll('section');
 const navbarList = document.querySelector('#navbar__list');
+const topButtonList = document.querySelectorAll('.top__button');
 
 /**
  * End Global Variables
@@ -37,6 +38,18 @@ function checkViewport(sec) {
         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
         rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
+}
+
+//show Go to Top button if parent section is in the viewport
+function showButton(buttonList) {
+    for (const button of buttonList) {
+        if (checkViewport(button.parentElement)) {
+            button.style.display = "block";
+        }
+        else {
+            button.style.display = "none";
+        }
+    }
 }
 
 /**
@@ -94,5 +107,11 @@ navbarList.addEventListener('click', function(event) {
     sectionToScroll.scrollIntoView({block: 'end', behavior: 'smooth'});
 });
 
-// Set sections as active
-window.onscroll = function() {setActiveSection(sectionList)};
+// Set sections as active AND show Go to Top button on scroll including functionality for button
+window.onscroll = function() {
+    setActiveSection(sectionList);
+    showButton(topButtonList);
+};
+
+//
+//topButtonList.addEventListener('click', function(event))

@@ -153,6 +153,27 @@ section:nth-of-type(even) .landing__container {
     text-align: right; 
 }
 
+button.top__button {
+    display: none; /* hidden by default*/
+    outline: none;
+    background-color: rgba(248, 241, 241, 0.068);
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+#buttonSection2,
+#buttonSection4 {
+    position: absolute;
+    right: 65px;
+}
+
+button.top__button:hover {
+    background-color: rgb(85, 85, 85);
+}
+
 /* Background Circles */
 /* Note that background circles are created with psuedo elements before and after */
 /* Circles appear to be random do to use of :nth-of-type psuedo class */
