@@ -90,6 +90,7 @@ navbarList.addEventListener('click', function(event) {
     ? event.target
     : event.target.parentElement;
     const sectionToScroll = document.querySelector(`#${clickedSection.getAttribute('data-link')}`);
+    // scrollIntoView with options not supported in Safari Browser
     sectionToScroll.scrollIntoView({block: 'end', behavior: 'smooth'});
 });
 

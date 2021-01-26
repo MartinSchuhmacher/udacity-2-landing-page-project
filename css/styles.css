@@ -29,7 +29,12 @@ h1 {
 @media only screen and (min-width: 35em){
     h1 {
         font-size: 7em;
-        margin: 2em 4rem 1em;
+        margin: 2em 4rem 0em;
+    }
+
+    h4 {
+        font-size: 2em;
+        margin: 0 4rem 1em;
     }
 }
 
