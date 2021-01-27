@@ -1,6 +1,7 @@
 # udacity-landing-page-project
 This is the repository for Project 2: Landing Page of the Udacity Front End Web Developer Nanodegree Program.
 Starter Code for a static version of the Landing Page was provided by Udacity.
+Several javascript methods were used to alter the DOM and come up with additional functionality.
 Single quality of life functionalities are not supported in Safari Browser.
 Typical ES6 functionalities like let, const and arrow functions are used and responsive design is provided.
 
