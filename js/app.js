@@ -40,17 +40,12 @@ function checkViewport(sec) {
     );
 }
 
-//show Go to Top button if parent section is in the viewport
+// show Go to Top button if parent section is in the viewport
 function showButton(buttonList) {
     for (const button of buttonList) {
-        if (checkViewport(button.parentElement)) {
-            button.style.display = "block";
-        }
-        else {
-            button.style.display = "none";
+        checkViewport(button.parentElement) ? button.style.display = 'block' : button.style.display = 'none';
         }
     }
-}
 
 /**
  * End Helper Functions
@@ -58,10 +53,10 @@ function showButton(buttonList) {
  * 
 */
 
-// function to build list items with given section list and fragment for cache
-// QUESTION for reviewer: tried that with document fragment but I needed something similar for element (fragment), does that exist? could not find something like that
+// function to build list items with given section list and navigation list
+// QUESTION for reviewer: tried that with document fragment (to increase performance) but I needed something similar for element (fragment), does that exist? could not find something like that
 function buildListItems(secList, navList) {
-    //for..of loop to create list item for every item in the secList and cache in the former created fragment 
+    //for..of loop to create list item for every item in the secList and attach to the given navList
     for (const sec of secList) {
         const newElement =
             `<li data-link=${sec.getAttribute('id')} class="menu__link">
@@ -74,6 +69,7 @@ function buildListItems(secList, navList) {
 // Add class 'active' to section when in recent view position
 function setActiveSection(secList) {
     for (const sec of secList) {
+        //classical if-else for readability
         if (checkViewport(sec)) {
             sec.classList.add('active');
             document.querySelector(`[data-link="${sec.getAttribute('id')}"]`).classList.add('active');
@@ -115,7 +111,7 @@ for (const button of topButtonList) {
     });
 }
 
-// Set sections as active AND show Go to Top button on scroll including functionality for button
+// Set sections as active AND show Go to Top button on scroll
 window.onscroll = function() {
     setActiveSection(sectionList);
     showButton(topButtonList);
