@@ -90,11 +90,8 @@ li a {
 }
 
 li.active {
-    border-style: solid;
-    border-radius: 12px;
-    border-color:#000;
     background-color: rgba(15, 28, 107, 0.603);
-    transition: ease 0.2s all;
+    transition: ease 0.8s all;
 }
 
 .navbar__menu .menu__link {
@@ -106,7 +103,6 @@ li.active {
 }
 
 .navbar__menu .menu__link:hover {
-    border-radius: 12px;
     background: rgba(15, 28, 107, 0.603);
     color: #fff;
     transition: ease 0.2s all;
@@ -171,12 +167,12 @@ button.top__button {
 }
 
 button.top__button:hover {
-    background-color: rgb(85, 85, 85);
+    background-color: rgba(85, 85, 85, 0.5);
 }
 
 /* Background Circles */
 /* Note that background circles are created with psuedo elements before and after */
-/* Circles appear to be random do to use of :nth-of-type psuedo class */
+/* Circles appear to be random due to use of :nth-of-type psuedo class */
 section:nth-of-type(odd) .landing__container::before {
     content: '';
     background: rgba(255, 255, 255, 0.187);

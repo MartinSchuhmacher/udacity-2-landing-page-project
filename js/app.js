@@ -107,11 +107,16 @@ navbarList.addEventListener('click', function(event) {
     sectionToScroll.scrollIntoView({block: 'end', behavior: 'smooth'});
 });
 
+// Go to top of the page on button click
+for (const button of topButtonList) {
+    button.addEventListener('click', function() {
+        // scrollTo with behavior not supported in Safari Browser
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+}
+
 // Set sections as active AND show Go to Top button on scroll including functionality for button
 window.onscroll = function() {
     setActiveSection(sectionList);
     showButton(topButtonList);
 };
-
-//
-//topButtonList.addEventListener('click', function(event))
