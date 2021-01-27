@@ -29,7 +29,7 @@ const topButtonList = document.querySelectorAll('.top__button');
 */
 
 // function to check if the given section is in the viewport
-function checkViewport(sec) {
+let checkViewport = sec => {
     const rect = sec.getBoundingClientRect();
     return (
         rect.top >= 0 &&
@@ -39,9 +39,8 @@ function checkViewport(sec) {
         rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
 }
-
 // show Go to Top button if parent section is in the viewport
-function showButton(buttonList) {
+let showButton = buttonList => {
     for (const button of buttonList) {
         checkViewport(button.parentElement) ? button.style.display = 'block' : button.style.display = 'none';
         }
@@ -55,7 +54,7 @@ function showButton(buttonList) {
 
 // function to build list items with given section list and navigation list
 // QUESTION for reviewer: tried that with document fragment (to increase performance) but I needed something similar for element (fragment), does that exist? could not find something like that
-function buildListItems(secList, navList) {
+let buildListItems = (secList, navList) => {
     //for..of loop to create list item for every item in the secList and attach to the given navList
     for (const sec of secList) {
         const newElement =
@@ -67,7 +66,7 @@ function buildListItems(secList, navList) {
 }
 
 // Add class 'active' to section when in recent view position
-function setActiveSection(secList) {
+let setActiveSection = secList => {
     for (const sec of secList) {
         //classical if-else for readability
         if (checkViewport(sec)) {
@@ -90,10 +89,10 @@ function setActiveSection(secList) {
 */
 
 // Build menu 
-window.onload = function() {buildListItems(sectionList, navbarList)};
+window.onload = () => buildListItems(sectionList, navbarList);
 
 // Scroll smoothly to section on link click
-navbarList.addEventListener('click', function(event) {
+navbarList.addEventListener('click', event => {
     event.preventDefault();
     const clickedSection = event.target.hasAttribute('data-link')
     ? event.target
@@ -105,14 +104,14 @@ navbarList.addEventListener('click', function(event) {
 
 // Go to top of the page on button click
 for (const button of topButtonList) {
-    button.addEventListener('click', function() {
+    button.addEventListener('click', () =>
         // scrollTo with behavior not supported in Safari Browser
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    });
+        window.scrollTo({top: 0, behavior: 'smooth'})
+    );
 }
 
 // Set sections as active AND show Go to Top button on scroll
-window.onscroll = function() {
+window.onscroll = () => {
     setActiveSection(sectionList);
     showButton(topButtonList);
 };
