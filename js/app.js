@@ -39,12 +39,13 @@ let checkViewport = sec => {
         rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
 }
+
 // show Go to Top button if parent section is in the viewport
 let showButton = buttonList => {
     for (const button of buttonList) {
         checkViewport(button.parentElement) ? button.style.display = 'block' : button.style.display = 'none';
-        }
     }
+}
 
 /**
  * End Helper Functions
@@ -53,7 +54,6 @@ let showButton = buttonList => {
 */
 
 // function to build list items with given section list and navigation list
-// QUESTION for reviewer: tried that with document fragment (to increase performance) but I needed something similar for element (fragment), does that exist? could not find something like that
 let buildListItems = (secList, navList) => {
     //for..of loop to create list item for every item in the secList and attach to the given navList
     for (const sec of secList) {
@@ -70,14 +70,12 @@ let setActiveSection = secList => {
     for (const sec of secList) {
         //classical if-else for readability
         if (checkViewport(sec)) {
-            sec.classList.add('active');
-            document.querySelector(`[data-link="${sec.getAttribute('id')}"]`).classList.add('active');
+            sec.classList.toggle('active', true);
+            document.querySelector(`[data-link="${sec.getAttribute('id')}"]`).classList.toggle('active', true);
         }
         else {
-            if (sec.classList.contains('active')) {
-                sec.classList.remove('active');
-                document.querySelector(`[data-link="${sec.getAttribute('id')}"]`).classList.remove('active')
-            }
+            sec.classList.toggle('active', false);
+            document.querySelector(`[data-link="${sec.getAttribute('id')}"]`).classList.toggle('active', false);
         }
     }
 }
@@ -99,7 +97,7 @@ navbarList.addEventListener('click', event => {
     : event.target.parentElement;
     const sectionToScroll = document.querySelector(`#${clickedSection.getAttribute('data-link')}`);
     // scrollIntoView with options not supported in Safari Browser
-    sectionToScroll.scrollIntoView({block: 'end', behavior: 'smooth'});
+    sectionToScroll.scrollIntoView({block: 'center', behavior: 'smooth'});
 });
 
 // Go to top of the page on button click
